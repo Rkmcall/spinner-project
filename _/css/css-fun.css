@@ -1,0 +1,20 @@
+body {
+    background-color: #35495e;
+}
+#card {
+    width: 60%;
+    height: 398px;
+    border: 1px dotted gray;
+    margin: 24px auto;
+    background-color: #25303a;
+}
+.spinnerContainer {
+    position: relative;
+}
+.spinner {
+    position: absolute;
+}
+.spinDot {
+    position: relative;
+    display: block;
+}
