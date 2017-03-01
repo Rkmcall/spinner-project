@@ -11,10 +11,34 @@ body {
 .spinnerContainer {
     position: relative;
 }
+.spinnerRotate {
+    -moz-animation:1.2s rotateRight infinite linear;
+    -webkit-animation:1.2s rotateRight infinite linear;
+    display: block;
+}
 .spinner {
+    display: block;
     position: absolute;
 }
 .spinDot {
+    display: block;
     position: relative;
     display: block;
+}
+
+
+
+img{
+    -moz-animation:10s rotateRight infinite linear;
+    -webkit-animation:10s rotateRight infinite linear;
+}
+
+@-moz-keyframes rotateRight{
+    0%{ -moz-transform:rotate(0deg); -moz-transform-origin:50% 50%; }
+    100%{ -moz-transform:rotate(360deg); }
+}
+
+@-webkit-keyframes rotateRight{
+    0%{ -webkit-transform:rotate(0deg); -webkit-transform-origin:50% 50%; }
+    100%{ -webkit-transform:rotate(360deg); }
 }

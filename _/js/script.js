@@ -9,10 +9,12 @@
     var dotHeight = 12; // sets dot height in pixels
     var dotWidth =2; // sets dot size width in pixels
     var borderRadius = 1.5; // sets border radius of dots
-    var dotBGColor = "rgba(130,210,255,0.8)"; // color of dot 3f86d1
-    var degrees = 20; // sets degrees arc between dots
+    var dotBGColor = "rgba(130,210,255,0.8)"; // color of dot. Can be hex, rgb or rgba
+    var degrees = 20; // sets degrees arc between dots. Setting neg/pos will change direction of tracers
     var spinnerSize = 42; // sets circumference of spinner. In pixels
-    var spinnerDeg = 0; // set initial rotation of spinner
+    var spinnerDeg = 25; // set initial rotation of spinner
+    var spinnerTime = 3000; // set rotation time in milliseconds
+    var spinDir = "Right"; // set direction of spin
 
     // Gather initial values
     var spinDot = document.querySelectorAll('.spinDot');
@@ -37,7 +39,7 @@
     spinner[0].style.height = spinnerContainerX;
     spinnerContainer[0].style.width = spinnerContainerX;
     spinnerContainer[0].style.height = spinnerContainerX;
-    spinnerContainer[0].style.transform = degRotate;
+    //spinnerContainer[0].style.transform = degRotate;
 
     // Places Spinner in center of container
     var spinCenter = function () {
@@ -75,6 +77,26 @@
 
     }
 
+    // Add css classes to spinner to rotate. User settings are applied here
+
+//        -moz-animation:1.2s rotateRight infinite linear;
+//        -webkit-animation:1.2s rotateRight infinite linear;
+    var rotateSpinner = function () {
+        var spinTime = spinnerTime/1000;
+        console.log(spinTime);
+        var rotateStyle = '"' + spinTime;
+        rotateStyle += 's rotate' + spinDir + ' infinite linear"';
+        //rotateStyle += '-webkit-animation:' + spinTime;
+        //rotateStyle += 's rotate' + spinDir + ' infinite linear;"';
+        //var tStyle = "-moz-animation:1.5s rotateRight infinite linear;";
+        console.log(rotateStyle);
+        // !!!!!!****** THIS IS BREAKING HERE *****!!!!!!!!
+        spinnerContainer[0].style.animation = 'rotate' + spinDir;
+        console.log(spinDir);
+        spinnerContainer[0].style.animation += ' ' + spinTime + 's';
+        console.log(spinTime);
+        spinnerContainer[0].style.animation += ' linear infinite';
+    }(rotateSpinner);
 
 
 })();
