@@ -3,16 +3,15 @@
     /*jslint devel: true*/
 
     // Use these variables to set size of circle, dots, angle between dots, etc
-    var dotHeight = 6; // sets dot height in pixels
-    var dotWidth = 6; // sets dot size width in pixels
-    var borderRadius = 3; // sets border radius of dots
-    var degrees = 25; // sets degrees arc between dots
-    var spinnerSize = 48; // sets circumference of spinner. In pixels
-    var dotBGColor = "#3f86d1"; // color of dot
-    var dotNumber = 10; // Number of dots
     var initOpacity = 1; // Initial opacity of the spinner dot
-    var cloneOpacity = 0.4; // Opacity of the first cloned dot. A higher number will reduce the opacity of all cloned dots.
-    var opacityGradient = dotNumber * 0.004; // sets opacity gradiant - the lower the number the more dots will show || IS THERE A WAY TO SET THIS THAT IS MORE USER FRIENDLY
+    var trailOpacity = 0.3;
+    var dotNum = 17; // Number of dots
+    var dotHeight = 12; // sets dot height in pixels
+    var dotWidth =2; // sets dot size width in pixels
+    var borderRadius = 1.5; // sets border radius of dots
+    var dotBGColor = "rgba(130,210,255,0.8)"; // color of dot 3f86d1
+    var degrees = 20; // sets degrees arc between dots
+    var spinnerSize = 42; // sets circumference of spinner. In pixels
     var spinnerDeg = 0; // set initial rotation of spinner
 
     // Gather initial values
@@ -20,6 +19,7 @@
     var spinner = document.querySelectorAll('.spinner');
     var spinnerContainer = document.querySelectorAll('.spinnerContainer');
     var degRotate = 'rotate(' + spinnerDeg + 'deg)';
+    var gradientStep = trailOpacity/(dotNum);
 
     // Initialize spinner on page
     //var dotx = dotSize + 'px';
@@ -31,7 +31,7 @@
     spinDot[0].style.borderRadius = borderRadius;
     spinDot[0].style.backgroundColor = dotBGColor;
     spinDot[0].style.opacity = initOpacity;
-    dotNumber = dotNumber - 1;
+    dotNum = dotNum - 1;
     var spinnerContainerX = spinnerSize + 'px';
     spinner[0].style.width = spinnerContainerX;
     spinner[0].style.height = spinnerContainerX;
@@ -61,16 +61,16 @@
     }(dotPos);
 
     // Clone spinDot, rotates and sets opacity drop off of each clone
-    for (var i = 0; i < dotNumber; i++) {
+    for (var i = 0; i < dotNum; i++) {
         var contRotate = function () {
         //duplicate spinDot and parentNode
         var contClone = spinner[0].cloneNode(true);
         spinner[0].parentNode.appendChild(contClone);
         var deg = -(degrees + (degrees * i)) + 'deg';
-        var opacity = cloneOpacity - (opacityGradient * i);
-        //console.log(opacity);
+        trailOpacity -= gradientStep; // steps gradient level same number of steps as there are dots
+
         contClone.style.transform = 'rotate(' + deg + ')';
-        contClone.style.opacity = opacity;
+        contClone.style.opacity = trailOpacity;
         }();
 
     }
@@ -78,3 +78,7 @@
 
 
 })();
+
+
+// TO DO:
+// 1. add function to reverse direction of spinner
